@@ -23,18 +23,42 @@ setInterval(()=>{
 				else
 					serverBStatus = 'OK';
 				i++;
-			}else if (data[i].contains('TIME') ){
+			}else if (data[i].includes('TIME') ){
 				time = data[i];
+			}else{
+				i++;
 			}
 		}
-		console.log(time)
-		console.log("ServerA", serverAStatus);
-		console.log("ServerB", serverBStatus);
 	});
 },1000);
 
 app.get("/", (req, res) => {
-  res.send("This is the home Page");
+  res.send(
+  	`<table>
+  		<thead>
+  			<tr>
+  				<th>Hora</th>
+  				<th>Nombre</th>
+  				<th>Estado</th>
+  			</tr>
+  		</thead>
+
+  		<tbody>
+  			<tr>
+  				<td rowspan="3">${time}</td>
+  			</tr>
+  			<tr>
+  				<td>Server A</td>
+  				<td>${serverAStatus}</td>
+  			</tr>
+
+  			<tr>
+  				<td>Server B</td>
+  				<td>${serverBStatus}</td>
+  			</tr>
+  		</tbody>
+  	</table>`
+  );
 });
 
 app.listen(port, () => {
