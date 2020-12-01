@@ -4,6 +4,7 @@ const cors = require('cors')
 const port = 3000;
 const app = express();
 var bodyParser = require('body-parser')
+
 app.use(cors({origin:true, credentials:true}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extend: false}));
@@ -41,66 +42,18 @@ app.get("/", (req, res) => {
 		[
 			{
 				hora: time,
-				servidor : "server A",
+				servidor : "Server A",
 				estado: serverAStatus
 			},
 			{
 				hora: time,
-				servidor : "server B",
+				servidor : "Server B",
 				estado: serverBStatus
 			},
 
 		]
 	)
 });
-
-/*app.get("/", (req, res) => {
-	res.send(
-		`
-				<tr>
-					<td rowspan="3">${time}</td>
-				</tr>
-				<tr>
-					<td>Server A</td>
-					<td>${serverAStatus}</td>
-				</tr>
-  
-				<tr>
-					<td>Server B</td>
-					<td>${serverBStatus}</td>
-				</tr>
-				`
-	);
-});*/
-  
-/*app.get("/", (req, res) => {
-  res.send(
-  	`<table>
-  		<thead>
-  			<tr>
-  				<th>Hora</th>
-  				<th>Nombre</th>
-  				<th>Estado</th>
-  			</tr>
-  		</thead>
-
-  		<tbody>
-  			<tr>
-  				<td rowspan="3">${time}</td>
-  			</tr>
-  			<tr>
-  				<td>Server A</td>
-  				<td>${serverAStatus}</td>
-  			</tr>
-
-  			<tr>
-  				<td>Server B</td>
-  				<td>${serverBStatus}</td>
-  			</tr>
-  		</tbody>
-  	</table>`
-  );
-});*/
 
 app.listen(port, () => {
   console.log(`App is listening to port ${port}`);

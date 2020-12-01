@@ -21,7 +21,6 @@
 
     <div class="container">
         <h2>SERVER STATUS </h2>
-        <button class="btn btn-primary" onclick="getStatus()">Get</button>
 
         <table class="table">
             <thead class="thead-dark">
@@ -29,6 +28,7 @@
                     <th>Time</th>
                     <th>Server</th>
                     <th>Status</th>
+
                 </tr>
             </thead>
             <tbody id='content'>
@@ -37,43 +37,14 @@
                     <td>server A</td>
                     <td>OK</td>
                 </tr>
+                
+
             </tbody>
         </table>
     </div>
+    <button onclick="getStatus()">Get</button>
 
-    <script>
-        var content = document.querySelector('#content');
-        getStatus();
-
-        function getStatus() {
-            fetch('http://192.168.0.26:3000').then((response) => {
-                // *** Check for HTTP failure
-                console.log(response);
-                if (!response.ok) {
-                    throw new Error("HTTP status " + response.status);
-                }
-                // *** Read the text of the response
-                return response.json();
-            }).then(data =>{
-                table(data);
-            })
-        }
-
-        function table(data) {
-            console.log(data);
-            content.innerHTML = '';
-
-            for (let value of data) {
-                console.log('holi');
-                content.innerHTML += `
-                <tr>
-                    <td>${value.hora}</td>
-                    <td>${value.servidor}</td>
-                    <td>${value.estado}</td>
-                </tr>`;
-            }
-        }
-    </script>
+    <script src="js/client.js"></script>
 </body>
 
 </html>
