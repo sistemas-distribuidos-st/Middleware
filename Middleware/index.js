@@ -1,9 +1,10 @@
 const express = require("express");
 const readLastLines = require('read-last-lines');
+const cors = require('cors')
 const port = 3000;
 const app = express();
 var bodyParser = require('body-parser')
-
+app.use(cors({origin:true, credentials:true}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extend: false}));
 let serverAStatus = false;
@@ -36,7 +37,7 @@ setInterval(()=>{
 },1000);
 
 app.get("/", (req, res) => {
-	res.json(
+	res.send(
 		[
 			{
 				hora: time,
