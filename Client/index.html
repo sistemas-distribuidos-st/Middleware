@@ -78,14 +78,17 @@
         }
 
         function restart() {
-            const exec = require('child_process').exec;
-            var yourscript = exec('restart.sh', (error, stdout, stderr) => {
-                console.log(`${stdout}`);
-                console.log(`${stderr}`);
-                if (error !== null) {
-                    console.log(`exec error: ${error}`);
+            fetch('http://192.168.1.11:3000/restart').then((response) => {
+                // *** Check for HTTP failure
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error("HTTP status " + response.status);
                 }
-            });
+                // *** Read the text of the response
+                return response.json();
+            }).then(data => {
+                table(data);
+            })
         }
     </script>
 </body>
