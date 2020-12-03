@@ -57,14 +57,13 @@ app.get("/", (req, res) => {
 
 app.get("/restart", (req, res) => {
     const exec = require('child_process').exec;
-    var yourscript = exec('sh restart.sh'),
-        (error, stout, stderr) => {
+    var yourscript = exec('sh restart.sh', (error, stout, stderr) => {
             console.log(`${stdout}`);
             console.log(`${stderr}`);
             if (error !== null) {
                 console.log(`exec error: ${error}`);
             }
-        }
+        })
 });
 
 app.listen(port, () => {
