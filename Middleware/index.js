@@ -1,8 +1,13 @@
 const express = require("express");
 const readLastLines = require('read-last-lines');
+const cors = require('cors')
 const port = 3000;
 const app = express();
+var bodyParser = require('body-parser')
 
+app.use(cors({origin:true, credentials:true}))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extend: false}));
 let serverAStatus = false;
 let serverBStatus = false;
 let time='';
@@ -33,32 +38,21 @@ setInterval(()=>{
 },1000);
 
 app.get("/", (req, res) => {
-  res.send(
-  	`<table>
-  		<thead>
-  			<tr>
-  				<th>Hora</th>
-  				<th>Nombre</th>
-  				<th>Estado</th>
-  			</tr>
-  		</thead>
+	res.send(
+		[
+			{
+				hora: time,
+				servidor : "Server A",
+				estado: serverAStatus
+			},
+			{
+				hora: time,
+				servidor : "Server B",
+				estado: serverBStatus
+			},
 
-  		<tbody>
-  			<tr>
-  				<td rowspan="3">${time}</td>
-  			</tr>
-  			<tr>
-  				<td>Server A</td>
-  				<td>${serverAStatus}</td>
-  			</tr>
-
-  			<tr>
-  				<td>Server B</td>
-  				<td>${serverBStatus}</td>
-  			</tr>
-  		</tbody>
-  	</table>`
-  );
+		]
+	)
 });
 
 app.listen(port, () => {

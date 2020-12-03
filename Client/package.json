@@ -9,6 +9,7 @@
   "author": "Andrés Felipe Chaparro, Yohan Eduardo Caro, David Leonardo Malaver",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   }
 }
