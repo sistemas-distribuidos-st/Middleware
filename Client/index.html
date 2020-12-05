@@ -48,7 +48,7 @@
         getStatus();
 
         function getStatus() {
-            fetch('http://192.168.1.11:3000').then((response) => {
+            fetch('http://192.168.1.18:3000').then((response) => {
                 // *** Check for HTTP failure
                 console.log(response);
                 if (!response.ok) {
@@ -71,7 +71,7 @@
                         <td>${value.hora.substr(5)}</td>
                         <td>${value.servidor}</td>
                         <td class="text-danger"><i class="fas fa-exclamation-circle"></i></td>  
-                        <td><button class="btn btn-primary" onclick="getStatus()">Reset ${value.servidor}</button></td>
+                        <td><button class="btn btn-primary" onclick="restart()">Reset ${value.servidor}</button></td>
                         </tr>`;
                 } else {
                     content.innerHTML +=
@@ -86,7 +86,7 @@
         }
 
         function restart() {
-            fetch('http://192.168.1.11:3000/restart').then((response) => {
+            fetch('http://192.168.1.18:3000/restart').then((response) => {
                 // *** Check for HTTP failure
                 console.log(response);
                 if (!response.ok) {

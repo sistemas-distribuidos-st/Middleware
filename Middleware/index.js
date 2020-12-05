@@ -56,14 +56,25 @@ app.get("/", (req, res) => {
 });
 
 app.get("/restart", (req, res) => {
-    const exec = require('child_process').exec;
-    var yourscript = exec('sh restart.sh', (error, stout, stderr) => {
-            console.log(`${stdout}`);
-            console.log(`${stderr}`);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-        })
+	const exec = require('child_process').exec;
+	if( serverBStatus == 'FAIL'){
+		var yourscript = exec('sh restart.sh 192.168.1.15', (error, stout, stderr) => {
+				console.log(`${stdout}`);
+				console.log(`${stderr}`);
+				if (error !== null) {
+					console.log(`exec error: ${error}`);
+				}
+			})
+	}
+	if( serverAStatus == 'FAIL'){
+		var yourscript = exec('sh restart.sh 192.168.1.14', (error, stout, stderr) => {
+				console.log(`${stdout}`);
+				console.log(`${stderr}`);
+				if (error !== null) {
+					console.log(`exec error: ${error}`);
+				}
+			})
+	}
 });
 
 app.listen(port, () => {
